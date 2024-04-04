@@ -5,4 +5,4 @@ rem Commit changes with a message
 git commit -m "Deploy"
 
 rem Push changes to the remote repository 
-git push origin main
+git push origin main --force
