@@ -3,14 +3,18 @@ from flask_socketio import SocketIO, emit
 from pymongo import MongoClient
 from werkzeug.security import check_password_hash
 from dotenv import load_dotenv
+from os import getenv
+
+MONGO_URI = getenv("MONGO_URI") 
+SECRET_KEY = getenv("SECRET_KEY")
 
 load_dotenv()
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "SECRETKEY"
+app.config["SECRET_KEY"] = SECRET_KEY
 socketio = SocketIO(app)
 
-client = MongoClient("mongodb://localhost:27017")
+client = MongoClient(MONGO_URI)
 database = client["chat_app"]
 collection = database["messages"]
 users = database["users"]
