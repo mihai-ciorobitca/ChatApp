@@ -53,6 +53,10 @@ def handle_message(data):
     collection.insert_one({"sender": sender, "message": message})
     emit("new_message", {"sender": sender, "message": message}, broadcast=True)
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect("/login")
 
 if __name__ == "__main__":
     socketio.run(app)
